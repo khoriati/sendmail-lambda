@@ -1,0 +1,23 @@
+service: sendmailk
+
+provider:
+  name: aws
+  runtime: nodejs20.x
+  stage: ${opt:stage, 'dev'}
+  region: ${self:custom.regions.${self:provider.stage}}
+
+custom:
+  regions:
+    dev: us-east-2
+    prod: sa-east-1
+
+functions:
+  sendemail:
+    handler: src/index.handler
+    events:
+      - http:
+          path: sendemail
+          method: get
+
+plugins:
+  - serverless-offline

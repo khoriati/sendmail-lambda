@@ -18,15 +18,13 @@ nvm install 18
 npm install -g serverless
 ```
 
-### O package.json provocará um warning o uso de versões do node diferentes de 20
+### O package.json provocará um warning o uso de versões do node diferentes de 18
 
 ```json
 "engines": {
-    "node": "20.x"
+    "node": "18.x"
   }
 ```
-
-
 
 # Documentação dos Parâmetros para Envio de Email
 

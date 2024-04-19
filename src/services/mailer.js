@@ -1,15 +1,20 @@
 const nodemailer = require("nodemailer");
-const aws = require("@aws-sdk/client-ses");
+const { SESClient, SendRawEmailCommand } = require("@aws-sdk/client-ses");
 
-const transporter = nodemailer.createTransport({
-  SES: new aws.SES({
-    apiVersion: "2010-12-01",
-    region: "us-west-2",
-  }),
+const client = new SESClient({
+  region: "us-east-2",
+  apiVersion: "2010-12-01",
+});
+
+// Criar o transporte utilizando nodemailer
+// considerará as credenciais e region do ambiente
+let transporter = nodemailer.createTransport({
+  SES: { ses: client, aws: require("@aws-sdk/client-ses") },
 });
 
 module.exports = async (sendmailObject) => {
   try {
+    // console.log({ sendmailObject });
     return await transporter.sendMail(sendmailObject);
   } catch (error) {
     // handle / log / otheranyfuckingthing

@@ -150,15 +150,11 @@ module.exports = async (parameters) => {
   if (failures.length > 0) {
     throw new Error("Falhas ocorreram: \n" + JSON.stringify({ failures }, null, 2) + "\noriginal: " + JSON.stringify(parameters));
   } else {
-    // se não houver falhas, retorna os parâmetros normalizados
-    return {
-      ...normalizedParameters,
-      to: parameters.to,
-      cc: parameters.cc,
-      bcc: parameters.bcc,
-      subject: parameters.subject,
-      text: parameters.text,
-      html: parameters.html,
-    };
+    // se não houver falhas, normaliza os parâmetros
+    ["to", "subject", "text", "html", "cc", "bcc", "replyTo", "from"].forEach((p) => {
+      if (parameters[p]) normalizedParameters[p] = parameters[p];
+    });
+
+    return normalizedParameters;
   }
 };

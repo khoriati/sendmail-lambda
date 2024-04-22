@@ -4,22 +4,26 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "dev": "serverless offline",
-    "mon": "nodemon",
+    "dev": "nodemon",
+    "dev-standard": "serverless offline",
+    "logs5min": "aws dynamodb scan --table-name \"SendMail-logger\" --filter-expression \"#ts >= :timestamp_5min_ago\" --expression-attribute-names '{ \"#ts\": \"timestamp\" }' --expression-attribute-values '{ \":timestamp_5min_ago\": { \"N\": \"'\"$(( ( $(date +%s) - 300 ) * 1000 ))\"'\" } }' --query \"Items[*].[id.S, subject.S, messageId.S, to.L[0].S, timestamp.N]\" ",
     "test": "jest"
   },
   "engines": {
-    "node": ">=20.x"
+    "node": ">=18.x"
   },
   "keywords": [],
   "author": "",
   "license": "ISC",
   "dependencies": {
+    "@aws-sdk/client-dynamodb": "^3.556.0",
     "@aws-sdk/client-s3": "^3.556.0",
     "@aws-sdk/client-ses": "^3.556.0",
     "@aws-sdk/credential-provider-node": "^3.556.0",
+    "@aws-sdk/lib-dynamodb": "^3.556.0",
     "jsonschema": "^1.4.1",
-    "nodemailer": "^6.9.13"
+    "nodemailer": "^6.9.13",
+    "uuid": "^9.0.1"
   },
   "devDependencies": {
     "jest": "^29.7.0",

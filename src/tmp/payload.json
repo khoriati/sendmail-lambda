@@ -2,7 +2,7 @@
     "body": {
 	"from": "naoresponda@portlouis.inf.br", 
         "to": ["khoriati@gmail.com"],
-        "subject": "Hello from Serverless",
-        "text": "This is a test email."
+        "subject": "Serverless portdata test",
+        "text": "This is a test email only - please ignore."
     }
 }

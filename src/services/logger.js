@@ -13,18 +13,22 @@ async function log(type, item) {
 
   const params = {
     TableName: tableName,
-    Item: { id, timestamp: new Date().toISOString(), data: { type, ...item, attachmentsCount: item?.attachments?.length } },
+    Item: {
+      id,
+      timestamp: new Date().getTime(),
+      type,
+      ...item,
+      attachmentsCount: item?.attachments?.length || 0,
+    },
   };
 
   // em caso de erro, um email será enviado para um adm
   // e a exceção será "dropada"
   try {
     let docClientWriteResponse = await docClient.send(new PutCommand(params));
-    console.log("stored ", JSON.stringify(docClientWriteResponse));
+    // await new Promise((resolve) => setTimeout(resolve, 6000));
   } catch (e) {
-    console.log("FALHA AO GRAVAFR NO DYNAMO");
     console.log(e);
-    // notifyEmail(`Falha ao gravar no Dynamo ${type} `, item);
   }
 }
 

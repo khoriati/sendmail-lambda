@@ -1,6 +1,5 @@
 {
-  "watch": ["handler.js", "serverless.yml"],
+  "watch": ["*.js", "serverless.yml"],
   "ext": "js,yml",
   "exec": "serverless offline"
 }
-

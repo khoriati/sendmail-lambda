@@ -10,7 +10,14 @@ curl -o- https://raw.githubusercontent.com/nvm-sh/nvm/v0.38.0/install.sh | bash
 
 ## Instalação do node v18
 nvm install 18
+
+> Importante: no início do index.handler existe um trecho de código que IMPEDE a execução em outra versão. Caso haja necessidade de alteração de versão, atualize por favor o index e este documento.
+
+
 ```
+
+> Importante: no início do index.handler existe um trecho de código que **IMPEDE** a execução em outra versão.
+>
 
 ### Instalação do serverless globalmente
 

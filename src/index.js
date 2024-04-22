@@ -27,16 +27,13 @@ module.exports.handler = async (event) => {
     let { from, to, subject } = normalizedParameters;
     // console.log(JSON.stringify(normalizedParameters));
     let status = {
-      messageId: mailerResponse.messageId,
-      message: {
-        from,
-        to,
-        subject,
-      },
+      messageId: mailerResponse.messageId.replace(/[<>]/g, ""),
+      from,
+      to,
+      subject,
     };
 
-    console.log("*** STATUS ***", JSON.stringify(status, null, 4));
-    logger.log("INFO", status);
+    await logger.log("INFO", status);
 
     return { statusCode: 200, body: JSON.stringify(status, null, 2) };
   } catch (error) {

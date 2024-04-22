@@ -14,7 +14,6 @@ let transporter = nodemailer.createTransport({
 
 module.exports = async (sendmailObject) => {
   try {
-    // console.log({ sendmailObject });
     return await transporter.sendMail(sendmailObject);
   } catch (error) {
     // handle / log / otheranyfuckingthing
